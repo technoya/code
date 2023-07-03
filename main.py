@@ -3,6 +3,7 @@ from flask import request
 from flask import Response
 import requests
 import json
+
 app=Flask(__name__)
 
 
@@ -47,8 +48,9 @@ def index():
        if txt=="/start":
          sendmessage(chatid,"enter username")
        else:
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
       
-        u_name=requests.get("https://www.instagram.com/"+user+"/?__a=1&__d=dis")
+        u_name=requests.get("https://www.instagram.com/"+user+"/?__a=1&__d=dis",headers=headers)
         data=u_name.text
         p=json.loads(data)
         d=p['graphql']['user']['profile_pic_url']
@@ -56,23 +58,7 @@ def index():
         tel_send_image(chatid,d)
 
        return Response('ok',status=200)
-      
+       
    else:
       return "<h1> hello </h1>"
       
-      
-
-if __name__=='__main__':
-    app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
