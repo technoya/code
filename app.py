@@ -49,7 +49,7 @@ def index():
          sendmessage(chatid,"enter username")
        else:
       
-        u_name=requests.get("https://www.instagram.com/"+user+"/?__a=1&__d=dis",headers=headers)
+        u_name=requests.get("https://www.instagram.com/"+user+"/?__a=1&__d=dis")
         data=u_name.text
         p=json.loads(data)
         d=p['graphql']['user']['profile_pic_url']
